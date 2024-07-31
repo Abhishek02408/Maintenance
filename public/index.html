@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly Machine Health Status</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script defer src="jscript.js"></script>
+    <style>
+        /* Additional style for centering the table */
+        .excel-table {
+            text-align: center;
+            margin: auto;
+            width: 80%; /* Adjust width as needed */
+        }
+        .filter-container {
+            text-align: center;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-blur">
+        <h1>MAINTENANCE</h1>
+    </div>
+    <div class="container">
+        <header>
+            <h1>MONTHLY MACHINE HEALTH STATUS</h1>
+        </header>
+        <main>
+            <section class="summary">
+                <div class="centered">
+                    <h2>Summary</h2>
+                    <p id="totalIssues">Total Issues: 0</p>
+                    <p id="resolved">Resolved: 0</p>
+                    <p id="pending">Pending: 0</p>
+                </div>
+            </section>
+            <section class="filter-container">
+                <label for="startDate">Start Date: </label>
+                <input type="date" id="startDate">
+                <label for="endDate">End Date: </label>
+                <input type="date" id="endDate">
+                <button id="filterButton">Filter</button>
+            </section>
+            <section class="excel-table">
+                <h2>ABNORMALITY DATA</h2>
+                <table id="excelTable">
+                    <thead>
+                        <tr>
+                            <th>Serial Number</th>
+                            <th>Date</th>
+                            <th>Abnormality Description</th>
+                            <th>Observation Evidence</th>
+                            <th>Action Required</th>
+                            <th>Action Taken</th>
+                            <th>Closer Evidence</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Data rows will be dynamically added using JavaScript -->
+                    </tbody>
+                </table> 
+                <button id="downloadData">Download Data</button>
+                <button id="clearData">Clear All Data</button>
+                <button id="addData">Add Data</button>
+                <form id="dataForm" style="display: none;">
+                    <input type="date" id="date" required>
+                    <input type="text" id="abnormality" placeholder="Abnormality Description" required>
+                    <input type="file" id="observation" accept="image/*" required>
+                    <input type="text" id="actionRequired" placeholder="Action Required" required>
+                    <input type="text" id="actionTaken" placeholder="Action Taken" required>
+                    <input type="file" id="closerEvidence" accept="image/*" required>
+                    <select id="status">
+                        <option value="pending">Pending</option>
+                        <option value="resolved">Resolved</option>
+                    </select>
+                    <button type="button" id="submitData">Submit Data</button>
+                </form>
+            </section>
+            <section class="buttons">
+                <button id="showGraph">Show Graph</button>
+            </section>
+            <section class="graph" id="graphSection" style="display: none;">
+                <h2>Data Graph</h2>
+                <canvas id="myPieChart"></canvas>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
