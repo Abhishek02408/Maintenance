@@ -66,18 +66,18 @@
                 <button id="downloadData">Download Data</button>
                 <button id="clearData">Clear All Data</button>
                 <button id="addData">Add Data</button>
-                <form id="dataForm" style="display: none;">
-                    <input type="date" id="date" required>
-                    <input type="text" id="abnormality" placeholder="Abnormality Description" required>
-                    <input type="file" id="observation" accept="image/*" required>
-                    <input type="text" id="actionRequired" placeholder="Action Required" required>
-                    <input type="text" id="actionTaken" placeholder="Action Taken" required>
-                    <input type="file" id="closerEvidence" accept="image/*" required>
-                    <select id="status">
+                <form name="submit-to-google-sheet" id="dataForm" style="display: none;">
+                    <input name="Date" type="date" id="date" required>
+                    <input name="Abnormility Description" type="text" id="abnormality" placeholder="Abnormality Description" required>
+                    <input name="Observation Evidence" type="file" id="observation" accept="image/*" required>
+                    <input name="Action Required" type="text" id="actionRequired" placeholder="Action Required" required>
+                    <input name="Action Taken" type="text" id="actionTaken" placeholder="Action Taken" required>
+                    <input name="Closer Evidence" type="file" id="closerEvidence" accept="image/*" required>
+                    <select name="Status" id="status">
                         <option value="pending">Pending</option>
                         <option value="resolved">Resolved</option>
                     </select>
-                    <button type="button" id="submitData">Submit Data</button>
+                    <button type="submit" id="submitData">Submit Data</button>
                 </form>
             </section>
             <section class="buttons">
@@ -89,5 +89,17 @@
             </section>
         </main>
     </div>
+    <script>
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbzDxag64jFIf2xcdlHSCM3yTNc2npT-MQumF-GFOQn443R7EBngM7kDPwwHB_hs7z4pzg/exec'
+        const form = document.forms['submit-to-google-sheet']
+      
+        form.addEventListener('submit', e => {
+          e.preventDefault()
+          fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+            .then(response => console.log('Success!', response))
+            .catch(error => console.error('Error!', error.message))
+        })
+      </script>
+      
 </body>
 </html>
